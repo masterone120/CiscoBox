@@ -22,11 +22,11 @@ function App() {
                 <h1 className='page-header text-center'>Add Device</h1>
 
                 <BrowserRouter>
-                    <Routes>
+                    <Router>
                         <Route path='/' element={<ListDevicePage />} />
                         <Route path='/addnewdevice' element={<AddDevice />} />
                         <Route path='device/:id_device.edit' elemnt={<EditDevice />} />
-                    </Routes>
+                    </Router>
                 </BrowserRouter>
             </div>
 
