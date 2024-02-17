@@ -27,7 +27,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </li>
                 <li className='sidebar-list-item'>
                     <a href="">
-                        <BsFillGrid3X3GapFill className='icon'/> Phone
+                        <BsFillGrid3X3GapFill className='icon'/> Categories
                     </a>
                 </li>
                 <li className='sidebar-list-item'>

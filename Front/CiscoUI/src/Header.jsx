@@ -22,4 +22,3 @@ function Header({OpenSidebar}) {
 }
 
 export default Header
-
