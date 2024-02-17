@@ -46,13 +46,13 @@ def deviceList():
     return jsonify(results)
 
 
-@app.route('/deviceDetails/<id>', methods=['GET'])
+@app.route('/deviceDetails/<id_device>', methods=['GET'])
 def deviceDetails(id_device):
     device = Device.query.get(id_device)
     return device_schema.jsonify(device)
 
 
-@app.route('/deviceUpdate/<id>', methods=['PUT'])
+@app.route('/deviceUpdate/<id_device>', methods=['PUT'])
 def deviceUpdate(id_device):
     device = Device.query.get(id_device)
     typede = request.json['typede']
@@ -71,7 +71,7 @@ def deviceUpdate(id_device):
     return device_schema.jsonify(device)
 
 
-@app.route('/deviceDelete/<id>', methods=['DETELE'])
+@app.route('/deviceDelete/<id_device>', methods=['DETELE'])
 def deviceDelete(id_device):
     device = Device.query.get(id_device)
     db.session.delete(device)
@@ -91,7 +91,6 @@ def deviceAdd():
     db.session.add(device)
     db.session.commit()
     return device_schema.jsonify(device)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
