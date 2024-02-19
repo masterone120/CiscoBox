@@ -56,5 +56,5 @@ export default function AddDevice(){
                 </div>
             </div>
         </div>
-    )
+    );
 }

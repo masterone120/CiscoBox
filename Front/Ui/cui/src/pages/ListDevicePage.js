@@ -16,7 +16,7 @@ export default function ListDevicePage() {
     }
 
     const deleteDevice = (id_device) => {
-        axios.delete(`http://localhost:5000/devicedelete/${id_device}`).then(function(response) {
+        axios.delete(`http://127.0.0.1:5000/devicedelete/${id_device}`).then(function(response) {
             console.log(response.data);
             getDevices();
         });

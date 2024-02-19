@@ -71,7 +71,7 @@ def deviceupdate(id_device):
     return device_schema.jsonify(device)
 
 
-@app.route('/devicedelete/<id_device>', methods=['DETELE'])
+@app.route('/devicedelete/<id_device>', methods=['GET','DELETE'])
 def devicedelete(id_device):
     device = Device.query.get(id_device)
     db.session.delete(device)
