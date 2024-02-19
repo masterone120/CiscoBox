@@ -7,17 +7,17 @@ import {BrowserRouter, Router, Route} from 'react-router-dom'
 
 
 function App() {
-    const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+    // const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
 
-    const OpenSidebar = () => {
-        setOpenSidebarToggle(!openSidebarToggle)
-    }
+    // const OpenSidebar = () => {
+    //     setOpenSidebarToggle(!openSidebarToggle)
+    // }
 
     return (
         <div className='grid-container'>
-            <Header OpenSidebar={OpenSidebar}/>
+            {/* <Header OpenSidebar={OpenSidebar}/>
             <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
-            <Home />
+            <Home /> */}
             <div className='container'>
                 <h1 className='page-header text-center'>Add Device</h1>
 
