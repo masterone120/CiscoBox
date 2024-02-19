@@ -2,6 +2,9 @@
   text-align: center;
 }
 
+.hidetext { -webkit-text-security: disc; /* Default */ }
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

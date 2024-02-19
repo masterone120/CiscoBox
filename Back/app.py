@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Masterisbest120!@localhost:5432/CiscoBox'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Masterisbest120!@192.168.120.42:5432/CiscoBox'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -39,21 +39,21 @@ device_schema = DeviceSchema()
 devices_schema = DeviceSchema(many=True)
 
 
-@app.route('/deviceList', methods=['GET'])
-def deviceList():
+@app.route('/devicelist', methods=['GET'])
+def devicelist():
     all_device = Device.query.all()
     results = devices_schema.dump(all_device)
     return jsonify(results)
 
 
-@app.route('/deviceDetails/<id_device>', methods=['GET'])
-def deviceDetails(id_device):
+@app.route('/devicedetails/<id_device>', methods=['GET'])
+def devicedetails(id_device):
     device = Device.query.get(id_device)
     return device_schema.jsonify(device)
 
 
-@app.route('/deviceUpdate/<id_device>', methods=['PUT'])
-def deviceUpdate(id_device):
+@app.route('/deviceupdate/<id_device>', methods=['PUT'])
+def deviceupdate(id_device):
     device = Device.query.get(id_device)
     typede = request.json['typede']
     protocolde = request.json['protocolde']
@@ -71,16 +71,16 @@ def deviceUpdate(id_device):
     return device_schema.jsonify(device)
 
 
-@app.route('/deviceDelete/<id_device>', methods=['DETELE'])
-def deviceDelete(id_device):
+@app.route('/devicedelete/<id_device>', methods=['DETELE'])
+def devicedelete(id_device):
     device = Device.query.get(id_device)
     db.session.delete(device)
     db.session.commit()
     return device_schema.jsonify(device)
 
 
-@app.route('/deviceAdd', methods=['POST'])
-def deviceAdd():
+@app.route('/deviceadd', methods=['POST'])
+def deviceadd():
     typede = request.json['typede']
     protocolde = request.json['protocolde']
     userde = request.json['userde']

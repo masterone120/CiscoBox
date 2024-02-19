@@ -3,13 +3,13 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 
 export default function ListDevicePage() {
-    conts [devices, setDevices] = useState([]);
+    const [devices, setDevices] = useState([]);
     useEffect(() => {
         getDevices();
     },[]);
 
     function getDevices() {
-        axios.get('http://localhost:5000/listdevices').then(function(response) {
+        axios.get('http://localhost:5000/devicelist').then(function(response) {
             console.log(response.data);
             setDevices(response.data);
         });
@@ -49,7 +49,7 @@ export default function ListDevicePage() {
                                     <td>{device.typede}</td>
                                     <td>{device.protocolde}</td>
                                     <td>{device.userde}</td>
-                                    <td>{device.passde}</td>
+                                    <td className="hidetext">{device.passde}</td>
                                     <td>
                                         <Link to={`device/${device.id_device}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
                                         <button onClick={() => deleteDevice(device.id_device)} className="btn btn-danger">Delete</button>

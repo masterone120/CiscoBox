@@ -14,9 +14,9 @@ function App() {
 
         <BrowserRouter>
             <Routes>
-              <Route path='/' element={<ListDevicePage />} />
-              <Route path='/addnewdevice' element={<AddDevice />} />
-              <Route path='/device/:id_device/edit' element={<EditDevice />} />
+                <Route path='/' element={<ListDevicePage />} />
+                <Route path='/addnewdevice' element={<AddDevice />} />
+                <Route path='/device/:id_device/edit' element={<EditDevice />} />
             </Routes>
         
         </BrowserRouter>

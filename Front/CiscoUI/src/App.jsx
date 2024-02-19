@@ -1,37 +1,28 @@
-import React, { useState } from 'react'
-import './App.css'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Home from './Home'
-import {BrowserRouter, Router, Route} from 'react-router-dom'
+import React, {} from 'react';
+import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+import ListDevicePage from "./pages/ListDevicePage";
+import AddDevice from "./pages/AddDevice";
+import EditDevice from "./pages/EditDevice";
 
 function App() {
-    // const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
-
-    // const OpenSidebar = () => {
-    //     setOpenSidebarToggle(!openSidebarToggle)
-    // }
-
     return (
-        <div className='grid-container'>
-            {/* <Header OpenSidebar={OpenSidebar}/>
-            <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
-            <Home /> */}
+        <div className='vh-100 gradiant-custom'>
             <div className='container'>
-                <h1 className='page-header text-center'>Add Device</h1>
+                <h1 className='page-header text-center'>List Devices</h1>
 
                 <BrowserRouter>
-                    <Router>
+                    <Routes>
                         <Route path='/' element={<ListDevicePage />} />
                         <Route path='/addnewdevice' element={<AddDevice />} />
-                        <Route path='device/:id_device.edit' elemnt={<EditDevice />} />
-                    </Router>
+                        <Route path='/device/:id_device/edit' element={<EditDevice />} />
+                    </Routes>
+
                 </BrowserRouter>
             </div>
-
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
