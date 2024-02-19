@@ -39,6 +39,7 @@ export default function ListDevicePage() {
                                     <th>Device Protocol</th>
                                     <th>User Access</th>
                                     <th>Password</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
