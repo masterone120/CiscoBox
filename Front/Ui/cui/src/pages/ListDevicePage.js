@@ -2,6 +2,8 @@ import React, { useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 
+
+
 export default function ListDevicePage() {
     const [devices, setDevices] = useState([]);
     useEffect(() => {
@@ -22,6 +24,8 @@ export default function ListDevicePage() {
         });
         alert("Device Successfully deleted");
     }
+
+
 
     return (
         <div>

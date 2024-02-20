@@ -1,20 +1,17 @@
 import React, {} from 'react';
-import {LaptopOutlined, NotificationOutlined, UserOutlined} from "@ant-design/icons";
-import {Breadcrumb, Layout, Menu, theme} from "antd";
-// import './App.css';
+import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import ListDevicePage from "./pages/ListDevicePage";
 import AddDevice from "./pages/AddDevice";
 import EditDevice from "./pages/EditDevice";
 
-const {Header, Content, Footer, Sider} = Layout;
-
+const { Header, Content, Sider } = Layout;
 const items1 = ['1', '2', '3'].map((key) => ({
     key,
     label: `nav ${key}`,
 }));
-
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
     const key = String(index + 1);
     return {
@@ -22,28 +19,27 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, i
         icon: React.createElement(icon),
         label: `subnav ${key}`,
         children: new Array(4).fill(null).map((_, j) => {
-            const subkey = index * 4 + j + 1;
+            const subKey = index * 4 + j + 1;
             return {
-                key: subkey,
-                label: `option${subkey}`,
+                key: subKey,
+                label: `option${subKey}`,
             };
         }),
     };
 });
-
 const App = () => {
     const {
-        token: {colorBgContainer, borderRadiusLG},
+        token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
     return (
         <Layout>
             <Header
                 style={{
                     display: 'flex',
-                    allignItems: 'center',
+                    alignItems: 'center',
                 }}
             >
-                <div className="demo-logo"/>
+                <div className="demo-logo" />
                 <Menu
                     theme="dark"
                     mode="horizontal"
@@ -51,51 +47,49 @@ const App = () => {
                     items={items1}
                     style={{
                         flex: 1,
-                        minwidth: 0,
+                        minWidth: 0,
                     }}
                 />
             </Header>
-            <Content
-                style={{
-                    padding: '0 48px',
-                }}
-            >
-                <Breadcrumb
+            <Layout>
+                <Sider
+                    width={200}
                     style={{
-                        margin: '16px 0'
+                        background: colorBgContainer,
                     }}
                 >
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
+                    <Menu
+                        mode="inline"
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['sub1']}
+                        style={{
+                            height: '100%',
+                            borderRight: 0,
+                        }}
+                        items={items2}
+                    />
+                </Sider>
                 <Layout
                     style={{
-                        padding: '24px 0',
-                        background: colorBgContainer,
-                        borderRadius: borderRadiusLG,
+                        padding: '0 24px 24px',
                     }}
                 >
-                    <Sider
+                    <Breadcrumb
                         style={{
-                            background: colorBgContainer,
+                            margin: '16px 0',
                         }}
-                        width={200}
                     >
-                        <Menu
-                            mode="inline"
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
-                            style={{
-                                height: '100%',
-                            }}
-                            items={items2}
-                        />
-                    </Sider>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>List</Breadcrumb.Item>
+                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                    </Breadcrumb>
                     <Content
                         style={{
-                            padding: '0 24px',
+                            padding: 24,
+                            margin: 0,
                             minHeight: 280,
+                            background: colorBgContainer,
+                            borderRadius: borderRadiusLG,
                         }}
                     >
                         <div className='vh-100 gradiant-custom'>
@@ -115,17 +109,8 @@ const App = () => {
                         </div>
                     </Content>
                 </Layout>
-            </Content>
-            <Footer
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-
-            </Footer>
+            </Layout>
         </Layout>
     );
-
 };
-
 export default App;
