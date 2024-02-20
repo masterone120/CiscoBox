@@ -1,13 +1,40 @@
-import React, {} from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import React, {useState} from 'react';
+import {LaptopOutlined, NotificationOutlined, UserOutlined} from '@ant-design/icons';
+import {Breadcrumb, Layout, Menu, theme, Button} from 'antd';
+import {
+    ContainerOutlined,
+    DesktopOutlined,
+    MailOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined,
+} from '@ant-design/icons';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import ListDevicePage from "./pages/ListDevicePage";
 import AddDevice from "./pages/AddDevice";
 import EditDevice from "./pages/EditDevice";
 
-const { Header, Content, Sider } = Layout;
+function getItem(label, key, icon, children, type) {
+    return {
+        key,
+        icon,
+        children,
+        label,
+        type,
+    };
+}
+
+const items = [
+    getItem('Dashboard', '1', <PieChartOutlined/>),
+    getItem('Devices', 'cat2', <DesktopOutlined/>, [
+        getItem(<a href="/listdevicepage">Routers</a>, '3', <DesktopOutlined/>),
+        getItem('Phones', '4', <DesktopOutlined/>),
+    ]),
+    getItem('Gateway', '5', <ContainerOutlined/>),
+];
+
+const {Header, Content, Sider} = Layout;
 const items1 = ['1', '2', '3'].map((key) => ({
     key,
     label: `nav ${key}`,
@@ -29,8 +56,12 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, i
 });
 const App = () => {
     const {
-        token: { colorBgContainer, borderRadiusLG },
+        token: {colorBgContainer, borderRadiusLG},
     } = theme.useToken();
+    const [collapsed, setCollapsed] = useState(false);
+    const toggleCollapsed = () => {
+        setCollapsed(!collapsed);
+    };
     return (
         <Layout>
             <Header
@@ -39,7 +70,7 @@ const App = () => {
                     alignItems: 'center',
                 }}
             >
-                <div className="demo-logo" />
+                <div className="demo-logo"/>
                 <Menu
                     theme="dark"
                     mode="horizontal"
@@ -54,63 +85,67 @@ const App = () => {
             <Layout>
                 <Sider
                     width={200}
-                    style={{
-                        background: colorBgContainer,
-                    }}
                 >
-                    <Menu
-                        mode="inline"
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
+                    <Button
+                        type="primary"
+                        onClick={toggleCollapsed}
                         style={{
-                            height: '100%',
-                            borderRight: 0,
+                            marginBottom: 16,
                         }}
-                        items={items2}
+                    >
+                        {collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+                    </Button>
+                    <Menu
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['cat2']}
+                        mode="inline"
+                        theme="dark"
+                        inlineCollapsed={collapsed}
+                        items={items}
                     />
                 </Sider>
                 <Layout
-                    style={{
-                        padding: '0 24px 24px',
-                    }}
-                >
-                    <Breadcrumb
                         style={{
-                            margin: '16px 0',
+                            padding: '0 24px 24px',
                         }}
                     >
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <Content
-                        style={{
-                            padding: 24,
-                            margin: 0,
-                            minHeight: 280,
-                            background: colorBgContainer,
-                            borderRadius: borderRadiusLG,
-                        }}
-                    >
-                        <div className='vh-100 gradiant-custom'>
-                            <div className='container'>
-                                <h1 className='page-header text-center'>List Devices</h1>
+                        <Breadcrumb
+                            style={{
+                                margin: '16px 0',
+                            }}
+                        >
+                            <Breadcrumb.Item>Home</Breadcrumb.Item>
+                            <Breadcrumb.Item>List</Breadcrumb.Item>
+                            <Breadcrumb.Item>App</Breadcrumb.Item>
+                        </Breadcrumb>
+                        <Content
+                            style={{
+                                padding: 24,
+                                margin: 0,
+                                minHeight: 280,
+                                background: colorBgContainer,
+                                borderRadius: borderRadiusLG,
+                            }}
+                        >
+                            <div className='vh-100 gradiant-custom'>
+                                <div className='container'>
+                                    <h1 className='page-header text-center'>List Devices</h1>
 
-                                <BrowserRouter>
-                                    <Routes>
-                                        <Route path='/' element={<ListDevicePage/>}/>
-                                        <Route path='/addnewdevice' element={<AddDevice/>}/>
-                                        <Route path='/device/:id_device/edit' element={<EditDevice/>}/>
-                                    </Routes>
+                                    <BrowserRouter>
+                                        <Routes>
+                                            <Route path='/' element={<ListDevicePage/>}/>
+                                            <Route path='/addnewdevice' element={<AddDevice/>}/>
+                                            <Route path='/device/:id_device/edit' element={<EditDevice/>}/>
+                                        </Routes>
 
-                                </BrowserRouter>
+                                    </BrowserRouter>
+                                </div>
+
                             </div>
-
-                        </div>
-                    </Content>
-                </Layout>
+                        </Content>
+                    </Layout>
             </Layout>
         </Layout>
-    );
+);
 };
 export default App;
