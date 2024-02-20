@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+import Dashboard from './pages/Dashboard'
 import ListDevicePage from "./pages/ListDevicePage";
 import AddDevice from "./pages/AddDevice";
 import EditDevice from "./pages/EditDevice";
@@ -28,10 +29,10 @@ function getItem(label, key, icon, children, type) {
 const items = [
     getItem('Dashboard', '1', <PieChartOutlined/>),
     getItem('Devices', 'cat2', <DesktopOutlined/>, [
-        getItem(<a href="/listdevicepage">Routers</a>, '3', <DesktopOutlined/>),
+        getItem(<a href="/listdevice">Routers</a>, '3', <DesktopOutlined/>),
         getItem('Phones', '4', <DesktopOutlined/>),
     ]),
-    getItem('Gateway', '5', <ContainerOutlined/>),
+    getItem('Gateway', '5', <MailOutlined/>),
 ];
 
 const {Header, Content, Sider} = Layout;
@@ -129,11 +130,10 @@ const App = () => {
                         >
                             <div className='vh-100 gradiant-custom'>
                                 <div className='container'>
-                                    <h1 className='page-header text-center'>List Devices</h1>
-
                                     <BrowserRouter>
                                         <Routes>
-                                            <Route path='/' element={<ListDevicePage/>}/>
+                                            <Route path='/' element={<Dashboard />} />
+                                            <Route path='/listdevice' element={<ListDevicePage/>}/>
                                             <Route path='/addnewdevice' element={<AddDevice/>}/>
                                             <Route path='/device/:id_device/edit' element={<EditDevice/>}/>
                                         </Routes>

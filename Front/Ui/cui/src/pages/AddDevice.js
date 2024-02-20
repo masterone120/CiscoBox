@@ -17,7 +17,7 @@ export default function AddDevice(){
 
         axios.post('http://localhost:5000/deviceadd', inputs).then(function (response) {
             console.log(response.data);
-            navigate('/');
+            navigate('/listdevice');
         });
     }
 
