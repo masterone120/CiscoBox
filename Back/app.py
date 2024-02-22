@@ -154,7 +154,7 @@ def directorydelete(id_numplan):
     return numplan_schema.jsonify(directory)
 
 
-@app.route('/directoryadd', methods=['POST'])
+@app.route('/directoryadd', methods=['GET','POST'])
 def directoryadd():
     tagdn = request.json['tagdn']
     numberdn = request.json['numberdn']

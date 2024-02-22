@@ -15,6 +15,8 @@ import Dashboard from './pages/Dashboard'
 import ListDevicePage from "./pages/ListDevicePage";
 import AddDevice from "./pages/AddDevice";
 import EditDevice from "./pages/EditDevice";
+import ListDirectory from "./pages/Directory/ListDirectory";
+
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -32,8 +34,8 @@ const items = [
         getItem(<a href="/listdevice">Routers</a>, '3', <DesktopOutlined/>),
         getItem('Phones', '4', <DesktopOutlined/>),
     ]),
-    getItem('EndUser', '5', <MailOutlined/>),
-    getItem('Gateway', '6', <PieChartOutlined/>),
+    getItem(<a href="/listdirectory">End Users</a>, '5', <MailOutlined/>),
+    getItem('Gateway', '6', <ContainerOutlined/>),
 ];
 
 const {Header, Content, Sider} = Layout;
@@ -137,6 +139,7 @@ const App = () => {
                                             <Route path='/listdevice' element={<ListDevicePage/>}/>
                                             <Route path='/addnewdevice' element={<AddDevice/>}/>
                                             <Route path='/device/:id_device/edit' element={<EditDevice/>}/>
+                                            <Route path='/listdirectory' element={<ListDirectory/>} />
                                         </Routes>
 
                                     </BrowserRouter>
