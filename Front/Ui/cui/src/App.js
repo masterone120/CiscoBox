@@ -32,7 +32,8 @@ const items = [
         getItem(<a href="/listdevice">Routers</a>, '3', <DesktopOutlined/>),
         getItem('Phones', '4', <DesktopOutlined/>),
     ]),
-    getItem('Gateway', '5', <MailOutlined/>),
+    getItem('EndUser', '5', <MailOutlined/>),
+    getItem('Gateway', '6', <PieChartOutlined/>),
 ];
 
 const {Header, Content, Sider} = Layout;

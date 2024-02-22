@@ -26,7 +26,6 @@ export default function ListDevicePage() {
     }
 
 
-
     return (
         <div>
             <div className="container h-100">
@@ -56,7 +55,7 @@ export default function ListDevicePage() {
                                     <td>{device.userde}</td>
                                     <td className="hidetext">{device.passde}</td>
                                     <td>
-                                        <Link to={`device/${device.id_device}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
+                                        <Link to={`/device/${device.id_device}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
                                         <button onClick={() => deleteDevice(device.id_device)} className="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
