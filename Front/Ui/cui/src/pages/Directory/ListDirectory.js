@@ -62,8 +62,8 @@ export default function ListDirectory() {
                     <TableRow>
                         <StyledTableCell>Directory Tag</StyledTableCell>
                         <StyledTableCell>Directory Number</StyledTableCell>
-                        <StyledTableCell>User Owner</StyledTableCell>
-                        <StyledTableCell>Desciption</StyledTableCell>
+                        <StyledTableCell>Owner</StyledTableCell>
+                        <StyledTableCell>Description</StyledTableCell>
                         <StyledTableCell>Action</StyledTableCell>
                     </TableRow>
                 </TableHead>
