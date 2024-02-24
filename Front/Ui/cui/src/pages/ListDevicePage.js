@@ -39,6 +39,7 @@ export default function ListDevicePage() {
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Device Type</th>
+                                    <th>IP Address</th>
                                     <th>Device Protocol</th>
                                     <th>User Access</th>
                                     <th>Password</th>
@@ -51,6 +52,7 @@ export default function ListDevicePage() {
                                     <td>{device.id_device}</td>
                                     <td>{device.namede}</td>
                                     <td>{device.typede}</td>
+                                    <td>{device.ipaddrde}</td>
                                     <td>{device.protocolde}</td>
                                     <td>{device.userde}</td>
                                     <td className="hidetext">{device.passde}</td>

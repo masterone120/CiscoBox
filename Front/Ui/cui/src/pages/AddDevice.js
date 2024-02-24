@@ -31,23 +31,27 @@ export default function AddDevice(){
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label>Name</label>
-                                <input type="text" className="form-control" name="namede" onChange={handleChange} />
+                                <input type="text" className="form-control" name="namede" onChange={handleChange}/>
                             </div>
                             <div className="mb-3">
                                 <label>Device Type</label>
-                                <input type="text" className="form-control" name="typede" onChange={handleChange} />
+                                <input type="text" className="form-control" name="typede" onChange={handleChange}/>
+                            </div>
+                            <div className="mb-3">
+                                <label>IP Address</label>
+                                <input type="text" className="form-control" name="ipaddrde" onChange={handleChange}/>
                             </div>
                             <div className="mb-3">
                                 <label>Device Protocol</label>
-                                <input type="text" className="form-control" name="protocolde" onChange={handleChange} />
+                                <input type="text" className="form-control" name="protocolde" onChange={handleChange}/>
                             </div>
                             <div className="mb-3">
                                 <label>User Access</label>
-                                <input type="text" className="form-control" name="userde" onChange={handleChange} />
+                                <input type="text" className="form-control" name="userde" onChange={handleChange}/>
                             </div>
                             <div className="mb-3">
                                 <label>Password</label>
-                                <input type="password" className="form-control" name="passde" onChange={handleChange} />
+                                <input type="password" className="form-control" name="passde" onChange={handleChange}/>
                             </div>
                             <button type="submit" name="add" className="btn btn-primary">Add</button>
                         </form>

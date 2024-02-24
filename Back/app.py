@@ -17,13 +17,15 @@ class Device(db.Model):
     __tablename__ = "device"
     id_device = db.Column(db.Integer, primary_key=True)
     typede = db.Column(db.Text)
+    ipaddrde = db.Column(db.Text)
     protocolde = db.Column(db.Text)
     userde = db.Column(db.Text)
     passde = db.Column(db.Text)
     namede = db.Column(db.Text)
 
-    def __init__(self, typede, protocolde, userde, passde, namede):
+    def __init__(self, typede, ipaddrde, protocolde, userde, passde, namede):
         self.typede = typede
+        self.ipaddrde = ipaddrde
         self.protocolde = protocolde
         self.userde = userde
         self.passde = passde
@@ -49,7 +51,7 @@ class Numplan(db.Model):
 
 class DeviceSchema(ma.Schema):
     class Meta:
-        fields = ('id_device', 'typede', 'protocolde', 'userde', 'passde', 'namede')
+        fields = ('id_device', 'typede', 'ipaddrde', 'protocolde', 'userde', 'passde', 'namede')
 
 
 device_schema = DeviceSchema()
@@ -80,16 +82,19 @@ def devicedetails(id_device):
 def deviceupdate(id_device):
     device = Device.query.get(id_device)
     typede = request.json['typede']
+    ipaddrde = request.json['ipaddrde']
     protocolde = request.json['protocolde']
     userde = request.json['userde']
     passde = request.json['passde']
     namede = request.json['namede']
+
 
     device.typede = typede
     device.protocolde = protocolde
     device.userde = userde
     device.passde = passde
     device.namede = namede
+    device.ipaddrde = ipaddrde
 
     db.session.commit()
     return device_schema.jsonify(device)
@@ -110,8 +115,9 @@ def deviceadd():
     userde = request.json['userde']
     passde = request.json['passde']
     namede = request.json['namede']
+    ipaddrde = request.json['ipaddrde']
 
-    device = Device(typede, protocolde, userde, passde, namede)
+    device = Device(typede, protocolde, userde, passde, namede, ipaddrde)
     db.session.add(device)
     db.session.commit()
     return device_schema.jsonify(device)
