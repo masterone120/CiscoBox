@@ -51,20 +51,20 @@ class Phone(db.Model):
     __tablename__ = "phone"
     id_phone = db.Column(db.Integer, primary_key=True)
     tagpe = db.Column(db.Integer)
+    ownerpe = db.Column(db.Text)
     typepe = db.Column(db.Text)
     idmacpe = db.Column(db.Text)
-    ownerpe = db.Column(db.Text)
     linepe = db.Column(db.Integer)
     codecpe = db.Column(db.Text)
     userdnpe = db.Column(db.Integer)
     passdnpe = db.Column(db.Integer)
     vcodecpe = db.Column(db.Text)
 
-    def __init__(self, tagpe, typepe, idmacpe, ownerpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe):
+    def __init__(self, tagpe,ownerpe, typepe, idmacpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe):
         self.tagpe = tagpe
+        self.ownerpe = ownerpe
         self.typepe = typepe
         self.idmacpe = idmacpe
-        self.ownerpe = ownerpe
         self.linepe = linepe
         self.codecpe = codecpe
         self.userdnpe = userdnpe
@@ -92,7 +92,7 @@ numplans_schema = NumplanSchema(many=True)
 
 class PhoneSchema(ma.Schema):
     class Meta:
-        fields = ('id_phone', 'tagpe', 'typepe', 'idmacpe', 'ownerpe', 'linepe', 'codecpe', 'userdnpe', 'passdnpe', 'vcodecpe')
+        fields = ('id_phone', 'tagpe', 'ownerpe', 'typepe', 'idmacpe', 'linepe', 'codecpe', 'userdnpe', 'passdnpe', 'vcodecpe')
 
 phone_schema = PhoneSchema()
 phones_schema = PhoneSchema(many=True)
