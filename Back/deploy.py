@@ -21,5 +21,6 @@ def deploy():
         device = str(char[5])
         cur.execute("SELECT id_numplan,tagdn,numberdn,namedn,desdn FROM `ciscobox`.`numplan` WHERE device='%s'" % device)
         char2 = cur.fetchone()
+        directory = str()
 
 

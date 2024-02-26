@@ -12,9 +12,9 @@ import {
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard'
-import ListDevicePage from "./pages/ListDevicePage";
-import AddDevice from "./pages/AddDevice";
-import EditDevice from "./pages/EditDevice";
+import ListDevicePage from "./pages/Routers/ListDevicePage";
+import AddDevice from "./pages/Routers/AddDevice";
+import EditDevice from "./pages/Routers/EditDevice";
 import ListDirectory from "./pages/Directory/ListDirectory";
 
 

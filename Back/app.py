@@ -47,6 +47,30 @@ class Numplan(db.Model):
         self.desdn = desdn
 
 
+class Phone(db.Model):
+    __tablename__ = "phone"
+    id_phone = db.Column(db.Integer, primary_key=True)
+    tagpe = db.Column(db.Integer)
+    typepe = db.Column(db.Text)
+    idmacpe = db.Column(db.Text)
+    ownerpe = db.Column(db.Text)
+    linepe = db.Column(db.Integer)
+    codecpe = db.Column(db.Text)
+    userdnpe = db.Column(db.Integer)
+    passdnpe = db.Column(db.Integer)
+    vcodecpe = db.Column(db.Text)
+
+    def __init__(self, tagpe, typepe, idmacpe, ownerpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe):
+        self.tagpe = tagpe
+        self.typepe = typepe
+        self.idmacpe = idmacpe
+        self.ownerpe = ownerpe
+        self.linepe = linepe
+        self.codecpe = codecpe
+        self.userdnpe = userdnpe
+        self.passdnpe = passdnpe
+        self.vcodecpe = vcodecpe
+
 
 
 class DeviceSchema(ma.Schema):
@@ -64,6 +88,14 @@ class NumplanSchema(ma.Schema):
 
 numplan_schema = NumplanSchema()
 numplans_schema = NumplanSchema(many=True)
+
+
+class PhoneSchema(ma.Schema):
+    class Meta:
+        fields = ('id_phone', 'tagpe', 'typepe', 'idmacpe', 'ownerpe', 'linepe', 'codecpe', 'userdnpe', 'passdnpe', 'vcodecpe')
+
+phone_schema = PhoneSchema()
+phones_schema = PhoneSchema(many=True)
 
 @app.route('/devicelist', methods=['GET'])
 def devicelist():
@@ -171,6 +203,70 @@ def directoryadd():
     db.session.add(directory)
     db.session.commit()
     return numplan_schema.jsonify(directory)
+
+
+@app.route('/phonelist', methods=['GET'])
+def phonelist():
+    phone = Phone.query.all()
+    results = phones_schema.dump(phone)
+    return jsonify(results)
+
+@app.route('/phonedetails/<id_phone>', methods=['GET'])
+def phonedetails(id_phone):
+    phone = Phone.query.get(id_phone)
+    return phone_schema.jsonify(phone)
+
+@app.route('/phoneupdate/<id_phone>', methods=['PUT'])
+def phoneupdate(id_phone):
+    phone = Phone.query.get(id_phone)
+    tagpe = request.json('tagpe')
+    ownerpe = request.json('ownerpe')
+    typepe = request.json('typepe')
+    idmacpe = request.json('idmacpe')
+    linepe = request.json('linepe')
+    codecpe = request.json('codecpe')
+    userdnpe = request.json('userdnpe')
+    passdnpe = request.json('passdnpe')
+    vcodecpe = request.json('vcodecpe')
+
+
+    phone.tagpe = tagpe
+    phone.ownerpe = ownerpe
+    phone.typepe = typepe
+    phone.idmacpe = idmacpe
+    phone.linepe = linepe
+    phone.codecpe = codecpe
+    phone.userdnpe = userdnpe
+    phone.passdnpe = passdnpe
+    phone.vcodecpe = vcodecpe
+
+    db.session.commit()
+    return phone_schema.jsonify(phone)
+
+@app.route('/phonedelete/<id_phone>', methods=['GET', 'DELETE'])
+def phonedelete(id_phone):
+    phone = Phone.query.get(id_phone)
+    db.session.delete(phone)
+    db.session.commit()
+    return phone_schema.jsonify(phone)
+
+@app.route('/phoneadd/', methods=['POST'])
+def phoneadd():
+    tagpe = request.json['tagpe']
+    ownerpe = request.json['ownerpe']
+    typepe = request.json['typepe']
+    idmacpe = request.json['idmacpe']
+    linepe = request.json['linepe']
+    codecpe = request.json['codecpe']
+    userdnpe = request.json['userdnpe']
+    passdnpe = request.json['passdnpe']
+    vcodecpe = request.json['vcodecpe']
+
+    phone = Phone(tagpe, ownerpe, typepe, idmacpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe)
+    db.session.add(phone)
+    db.session.commit()
+    return phone_schema.jsonify(phone)
+
 
 
 if __name__ == '__main__':
