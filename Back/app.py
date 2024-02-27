@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
+import psycopg2
+
 
 app = Flask(__name__)
 CORS(app)
@@ -250,7 +252,7 @@ def phonedelete(id_phone):
     db.session.commit()
     return phone_schema.jsonify(phone)
 
-@app.route('/phoneadd/', methods=['POST'])
+@app.route('/phoneadd', methods=['POST'])
 def phoneadd():
     tagpe = request.json['tagpe']
     ownerpe = request.json['ownerpe']
@@ -266,6 +268,18 @@ def phoneadd():
     db.session.add(phone)
     db.session.commit()
     return phone_schema.jsonify(phone)
+
+
+@app.route('/view', methods=['GET', 'POST'])
+def view():
+    phone = Phone.query.all()
+    device = Device.query.all()
+    dir = Numplan.query.all()
+    results = phones_schema.dump(phone)
+    results1 = devices_schema.dump(device)
+    results2 = numplans_schema.dump(dir)
+    return jsonify(results, results1, results2)
+
 
 
 
