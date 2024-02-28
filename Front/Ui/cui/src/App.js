@@ -18,6 +18,7 @@ import EditDevice from "./pages/Routers/EditDevice";
 import ListDirectory from "./pages/Directory/ListDirectory";
 import ListPhone from "./pages/Phone/ListPhone";
 import Deploy from "./pages/deploy";
+import AddPhone from "./pages/Phone/AddPhone"
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -143,6 +144,7 @@ const App = () => {
                                             <Route path='/listdirectory' element={<ListDirectory/>} />
                                             <Route path='/listphone' element={<ListPhone/>} />
                                             <Route path='/deploy' element={<Deploy/>} />
+                                            <Route path='/addphone' element={<AddPhone/>} />
                                         </Routes>
 
                                     </BrowserRouter>
