@@ -12,15 +12,14 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 
-
-
 export default function ListDirectory() {
     const [directorys, setDirectorys] = useState([]);
     useEffect(() => {
         getDirectorys();
-    },[]);
+    }, []);
+
     function getDirectorys() {
-        axios.get('http://localhost:5000/directorylist').then(function(response) {
+        axios.get('http://localhost:5000/directorylist').then(function (response) {
             console.log(response.data);
             setDirectorys(response.data);
         });
@@ -34,7 +33,7 @@ export default function ListDirectory() {
         alert("Directory Number Successfully Deleted!");
     }
 
-    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    const StyledTableCell = styled(TableCell)(({theme}) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.black,
             color: theme.palette.common.white,
@@ -44,7 +43,7 @@ export default function ListDirectory() {
         },
     }));
 
-    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    const StyledTableRow = styled(TableRow)(({theme}) => ({
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
         },
@@ -53,7 +52,6 @@ export default function ListDirectory() {
             border: 0,
         },
     }));
-
 
     return (
         <TableContainer component={Paper}>

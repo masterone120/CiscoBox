@@ -4,7 +4,6 @@ from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 import psycopg2
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -52,6 +51,7 @@ class Numplan(db.Model):
 class Phone(db.Model):
     __tablename__ = "phone"
     id_phone = db.Column(db.Integer, primary_key=True)
+    routerpe = db.Column(db.Text)
     tagpe = db.Column(db.Integer)
     ownerpe = db.Column(db.Text)
     typepe = db.Column(db.Text)
@@ -62,7 +62,8 @@ class Phone(db.Model):
     passdnpe = db.Column(db.Integer)
     vcodecpe = db.Column(db.Text)
 
-    def __init__(self, tagpe,ownerpe, typepe, idmacpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe):
+    def __init__(self, routerpe, tagpe, ownerpe, typepe, idmacpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe):
+        self.routerpe = routerpe
         self.tagpe = tagpe
         self.ownerpe = ownerpe
         self.typepe = typepe
@@ -72,7 +73,6 @@ class Phone(db.Model):
         self.userdnpe = userdnpe
         self.passdnpe = passdnpe
         self.vcodecpe = vcodecpe
-
 
 
 class DeviceSchema(ma.Schema):
@@ -88,16 +88,21 @@ class NumplanSchema(ma.Schema):
     class Meta:
         fields = ('id_numplan', 'tagdn', 'numberdn', 'namedn', 'desdn')
 
+
 numplan_schema = NumplanSchema()
 numplans_schema = NumplanSchema(many=True)
 
 
 class PhoneSchema(ma.Schema):
     class Meta:
-        fields = ('id_phone', 'tagpe', 'ownerpe', 'typepe', 'idmacpe', 'linepe', 'codecpe', 'userdnpe', 'passdnpe', 'vcodecpe')
+        fields = (
+        'id_phone', 'routerpe', 'tagpe', 'ownerpe', 'typepe', 'idmacpe', 'linepe', 'codecpe', 'userdnpe', 'passdnpe',
+        'vcodecpe')
+
 
 phone_schema = PhoneSchema()
 phones_schema = PhoneSchema(many=True)
+
 
 @app.route('/devicelist', methods=['GET'])
 def devicelist():
@@ -122,7 +127,6 @@ def deviceupdate(id_device):
     passde = request.json['passde']
     namede = request.json['namede']
 
-
     device.typede = typede
     device.protocolde = protocolde
     device.userde = userde
@@ -134,7 +138,7 @@ def deviceupdate(id_device):
     return device_schema.jsonify(device)
 
 
-@app.route('/devicedelete/<id_device>', methods=['GET','DELETE'])
+@app.route('/devicedelete/<id_device>', methods=['GET', 'DELETE'])
 def devicedelete(id_device):
     device = Device.query.get(id_device)
     db.session.delete(device)
@@ -162,6 +166,7 @@ def directorylist():
     all_directory = Numplan.query.all()
     results = numplans_schema.dump(all_directory)
     return jsonify(results)
+
 
 @app.route('/directorydetails/<id_numplan>', methods=['GET'])
 def directorydetails(id_numplan):
@@ -194,7 +199,7 @@ def directorydelete(id_numplan):
     return numplan_schema.jsonify(directory)
 
 
-@app.route('/directoryadd', methods=['GET','POST'])
+@app.route('/directoryadd', methods=['GET', 'POST'])
 def directoryadd():
     tagdn = request.json['tagdn']
     numberdn = request.json['numberdn']
@@ -213,14 +218,17 @@ def phonelist():
     results = phones_schema.dump(phone)
     return jsonify(results)
 
+
 @app.route('/phonedetails/<id_phone>', methods=['GET'])
 def phonedetails(id_phone):
     phone = Phone.query.get(id_phone)
     return phone_schema.jsonify(phone)
 
+
 @app.route('/phoneupdate/<id_phone>', methods=['PUT'])
 def phoneupdate(id_phone):
     phone = Phone.query.get(id_phone)
+    routerpe = request.json('routerpe')
     tagpe = request.json('tagpe')
     ownerpe = request.json('ownerpe')
     typepe = request.json('typepe')
@@ -231,7 +239,7 @@ def phoneupdate(id_phone):
     passdnpe = request.json('passdnpe')
     vcodecpe = request.json('vcodecpe')
 
-
+    phone.routerpe = routerpe
     phone.tagpe = tagpe
     phone.ownerpe = ownerpe
     phone.typepe = typepe
@@ -245,6 +253,7 @@ def phoneupdate(id_phone):
     db.session.commit()
     return phone_schema.jsonify(phone)
 
+
 @app.route('/phonedelete/<id_phone>', methods=['GET', 'DELETE'])
 def phonedelete(id_phone):
     phone = Phone.query.get(id_phone)
@@ -252,8 +261,10 @@ def phonedelete(id_phone):
     db.session.commit()
     return phone_schema.jsonify(phone)
 
-@app.route('/phoneadd', methods=['POST'])
+
+@app.route('/phoneadd', methods=['GET', 'POST'])
 def phoneadd():
+    routerpe = request.json['routerpe']
     tagpe = request.json['tagpe']
     ownerpe = request.json['ownerpe']
     typepe = request.json['typepe']
@@ -264,7 +275,7 @@ def phoneadd():
     passdnpe = request.json['passdnpe']
     vcodecpe = request.json['vcodecpe']
 
-    phone = Phone(tagpe, ownerpe, typepe, idmacpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe)
+    phone = Phone(routerpe, tagpe, ownerpe, typepe, idmacpe, linepe, codecpe, userdnpe, passdnpe, vcodecpe)
     db.session.add(phone)
     db.session.commit()
     return phone_schema.jsonify(phone)
@@ -279,8 +290,6 @@ def view():
     results1 = devices_schema.dump(device)
     results2 = numplans_schema.dump(dir)
     return jsonify(results, results1, results2)
-
-
 
 
 if __name__ == '__main__':

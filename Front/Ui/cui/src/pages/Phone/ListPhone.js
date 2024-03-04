@@ -57,6 +57,7 @@ export default function ListPhone() {
             <Table sx={{ minWidth:700}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
+                        <StyledTableCell>Phone Router</StyledTableCell>
                         <StyledTableCell>Phone Tag</StyledTableCell>
                         <StyledTableCell>Phone Owner</StyledTableCell>
                         <StyledTableCell>Phone Type</StyledTableCell>
@@ -72,6 +73,7 @@ export default function ListPhone() {
                 <TableBody>
                     {phones.map((phone, key) => (
                         <StyledTableRow key={key}>
+                            <StyledTableCell component="th" scope="row">{phone.routerpe}</StyledTableCell>
                             <StyledTableCell component="th" scope="row">{phone.tagpe}</StyledTableCell>
                             <StyledTableCell component="th" scope="row">{phone.ownerpe}</StyledTableCell>
                             <StyledTableCell component="th" scope="row">{phone.typepe}</StyledTableCell>

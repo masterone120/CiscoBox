@@ -6,7 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import {useNavigate} from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -41,7 +40,7 @@ export default function AddPhone() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post('https://localhost:5000/phoneadd', inputs).then(function (response) {
+        axios.post('http://localhost:5000/phoneadd', inputs).then(function (response) {
             console.log(response.data);
             navigate('/listphone');
         });
@@ -58,20 +57,21 @@ export default function AddPhone() {
                             <form onSubmit={handleSubmit}>
                             <FormControl fullWidth>
                                 <div className="mb-3">
-                                    <InputLabel name="namede" id="demo-simple-select-helper-label">Router</InputLabel>
+                                    <InputLabel name="router" id="demo-simple-select-helper-label">Router</InputLabel>
                                     {devices.map((device, key) =>
                                         <Select key={key}
                                                 displayEmpty
+                                                name="routerpe"
                                                 labelId="ddemo-simple-select-helper-label"
                                                 id="demo-simple-select-helper"
                                                 value={router}
                                                 label="Router"
                                                 onChange={handleChange}
                                         >
-                                            <MenuItem value="">
+                                            <MenuItem value="" name="routerpe">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={device.namede}>{device.namede}</MenuItem>
+                                            <MenuItem name="routerpe" value={device.namede}>{device.namede}</MenuItem>
                                         </Select>
                                     )}
                                 </div>
