@@ -9,9 +9,21 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link} from "react-router-dom";
 import Button from '@mui/material/Button';
 
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 export default function ListPhone() {
     const [phones, setPhones] = useState([]);
     useEffect(() => {
@@ -52,6 +64,10 @@ export default function ListPhone() {
     },
     }));
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth:700}} aria-label="customized table">
@@ -84,8 +100,8 @@ export default function ListPhone() {
                             <StyledTableCell component="th" scope="row">{phone.codecpe}</StyledTableCell>
                             <StyledTableCell component="th" scope="row">{phone.vcodecpe}</StyledTableCell>
                             <StyledTableCell component="th" scope="row">
-                                <Link to={'/phone/${phone.id_phone}/edit'} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
-                                <Button variant="contained" color="error" onClick={() => deletePhone(phone.id_phone)}>Delete</Button>
+                                <Link to={`/phone/${phone.id_phone}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
+                                <Button variant="contained" color="error" onClick={() => deletePhone(phone.id_phone)} >Delete</Button>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}

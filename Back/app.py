@@ -228,16 +228,16 @@ def phonedetails(id_phone):
 @app.route('/phoneupdate/<id_phone>', methods=['PUT'])
 def phoneupdate(id_phone):
     phone = Phone.query.get(id_phone)
-    routerpe = request.json('routerpe')
-    tagpe = request.json('tagpe')
-    ownerpe = request.json('ownerpe')
-    typepe = request.json('typepe')
-    idmacpe = request.json('idmacpe')
-    linepe = request.json('linepe')
-    codecpe = request.json('codecpe')
-    userdnpe = request.json('userdnpe')
-    passdnpe = request.json('passdnpe')
-    vcodecpe = request.json('vcodecpe')
+    routerpe = request.json['routerpe']
+    tagpe = request.json['tagpe']
+    ownerpe = request.json['ownerpe']
+    typepe = request.json['typepe']
+    idmacpe = request.json['idmacpe']
+    linepe = request.json['linepe']
+    codecpe = request.json['codecpe']
+    userdnpe = request.json['userdnpe']
+    passdnpe = request.json['passdnpe']
+    vcodecpe = request.json['vcodecpe']
 
     phone.routerpe = routerpe
     phone.tagpe = tagpe
