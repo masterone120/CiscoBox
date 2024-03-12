@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Label, Select, TextInput } from 'flowbite-react';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
@@ -16,13 +14,13 @@ import SendIcon from '@mui/icons-material/Send';
 export default function AddPhone() {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState([]);
-    const [router, setRouter] = useState('');
+
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value
         setInputs(values => ({...values, [name]: value}));
-        setRouter(event.target.value);
+
     }
 
     const [devices, setDevices] = useState([]);
@@ -34,6 +32,18 @@ export default function AddPhone() {
         axios.get('http://localhost:5000/devicelist').then(function (response) {
             console.log(response.data);
             setDevices(response.data);
+        });
+    }
+
+    const [directorys, setDirectorys] = useState([]);
+    useEffect(() => {
+        getDirectorys();
+    }, []);
+
+    function getDirectorys() {
+        axios.get(`http://localhost:5000/directorylist`).then(function (response) {
+            console.log(response.data);
+            setDirectorys(response.data);
         });
     }
 
@@ -52,73 +62,84 @@ export default function AddPhone() {
                 <div className="row">
                     <div className="col-2"></div>
                     <div className="col-8">
-                        <h1>Add Phone</h1>
-                        <Box sx={{ minWidth: 120 }}>
-                            <form onSubmit={handleSubmit}>
-                            <FormControl fullWidth>
+                        <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
+                            <span
+                                className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">ADD PHONE</span>
+                        </h2>
+                        <Box sx={{minWidth: 120}}>
+                        <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit}>
+                            <FormControl>
                                 <div className="mb-3">
-                                    <InputLabel name="router" id="demo-simple-select-helper-label">Router</InputLabel>
+                                    <Label htmlFor="Router" value="Select Router" />
                                     {devices.map((device, key) =>
-                                        <Select key={key}
-                                                displayEmpty
-                                                name="routerpe"
-                                                labelId="ddemo-simple-select-helper-label"
-                                                id="demo-simple-select-helper"
-                                                value={router}
-                                                label="Router"
-                                                onChange={handleChange}
-                                        >
-                                            <MenuItem value="" name="routerpe">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem name="routerpe" value={device.namede}>{device.namede}</MenuItem>
-                                        </Select>
-                                    )}
-                                </div>
+                                            <Select key={key}
+                                                    label="Router"
+                                                    onChange={handleChange}
+                                            >
+                                                <option name="router" value="">None</option>
+                                                <option name="routerpe"
+                                                          value={device.namede}>{device.namede}</option>
+                                            </Select>
+                                        )}
+                                    </div>
+                                    <div className="mb-3">
+                                        <Label htmlFor="phonetag" value="Phone Tag" />
+                                        <TextInput name="tagpe" id="phonetag" onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <Label htmlFor="countries" value="Select Owner" />
+                                        {directorys.map((directory, key2) =>
+                                            <Select key={key2}
+                                                    label="Owner"
+                                                    onChange={handleChange}
+                                            >
+
+                                                <option name="owner" value="">None</option>
+                                                <option name="ownerpe"
+                                                        value={directory.namedn}>{directory.namedn}</option>
+                                            </Select>
+                                        )}
+                                    </div>
                                 <div className="mb-3">
-                                    <TextField name="tagpe" id="outlined-basic" label="Phone Tag" variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="ownerpe" id="outlined-basic" label="Phone Owner" variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="typepe" id="outlined-basic" label="Phone Type" variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="linepe" id="outlined-basic" label="Line Number" variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="idmacpe" id="outlined-basic" label="Phone Name" variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="userdnpe" id="outlined-basic" label="Digist User"
-                                               variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="passdnpe" id="outlined-basic" label="Digist Password"
-                                               variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="codecpe" id="outlined-basic" label="Voice Codec" variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <TextField name="vcodecpe" id="outlined-basic" label="Class Codec"
-                                               variant="outlined"
-                                               onChange={handleChange}/>
-                                </div>
-                                <div className="mb-3">
-                                    <Button endIcon={<SendIcon/>} type="submit" name="add" variant="contained"
-                                            label="Add Phone"></Button>
-                                </div>
-                            </FormControl>
+                                        <TextField name="typepe" id="outlined-basic" label="Phone Type"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <TextField name="linepe" id="outlined-basic" label="Line Number"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <TextField name="idmacpe" id="outlined-basic" label="Phone Name"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <TextField name="userdnpe" id="outlined-basic" label="Digist User"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <TextField name="passdnpe" id="outlined-basic" label="Digist Password"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <TextField name="codecpe" id="outlined-basic" label="Voice Codec"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <TextField name="vcodecpe" id="outlined-basic" label="Class Codec"
+                                                   variant="outlined"
+                                                   onChange={handleChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <Button endIcon={<SendIcon/>} type="submit" name="add" variant="contained"
+                                                label="Add Phone"></Button>
+                                    </div>
+                                </FormControl>
                             </form>
                         </Box>
                     </div>
