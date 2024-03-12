@@ -17,20 +17,20 @@ ma = Marshmallow(app)
 class Device(db.Model):
     __tablename__ = "device"
     id_device = db.Column(db.Integer, primary_key=True)
+    namede = db.Column(db.Text)
     typede = db.Column(db.Text)
     ipaddrde = db.Column(db.Text)
     protocolde = db.Column(db.Text)
     userde = db.Column(db.Text)
     passde = db.Column(db.Text)
-    namede = db.Column(db.Text)
 
     def __init__(self, typede, ipaddrde, protocolde, userde, passde, namede):
+        self.namede = namede
         self.typede = typede
         self.ipaddrde = ipaddrde
         self.protocolde = protocolde
         self.userde = userde
         self.passde = passde
-        self.namede = namede
 
 
 class Numplan(db.Model):
@@ -77,7 +77,7 @@ class Phone(db.Model):
 
 class DeviceSchema(ma.Schema):
     class Meta:
-        fields = ('id_device', 'typede', 'ipaddrde', 'protocolde', 'userde', 'passde', 'namede')
+        fields = ('id_device', 'namede', 'typede', 'ipaddrde', 'protocolde', 'userde', 'passde')
 
 
 device_schema = DeviceSchema()
@@ -120,18 +120,18 @@ def devicedetails(id_device):
 @app.route('/deviceupdate/<id_device>', methods=['PUT'])
 def deviceupdate(id_device):
     device = Device.query.get(id_device)
+    namede = request.json['namede']
     typede = request.json['typede']
     ipaddrde = request.json['ipaddrde']
     protocolde = request.json['protocolde']
     userde = request.json['userde']
     passde = request.json['passde']
-    namede = request.json['namede']
 
+    device.namede = namede
     device.typede = typede
     device.protocolde = protocolde
     device.userde = userde
     device.passde = passde
-    device.namede = namede
     device.ipaddrde = ipaddrde
 
     db.session.commit()
@@ -148,14 +148,14 @@ def devicedelete(id_device):
 
 @app.route('/deviceadd', methods=['POST'])
 def deviceadd():
+    namede = request.json['namede']
     typede = request.json['typede']
+    ipaddrde = request.json['ipaddrde']
     protocolde = request.json['protocolde']
     userde = request.json['userde']
     passde = request.json['passde']
-    namede = request.json['namede']
-    ipaddrde = request.json['ipaddrde']
 
-    device = Device(typede, protocolde, userde, passde, namede, ipaddrde)
+    device = Device(namede, typede, ipaddrde, protocolde, userde, passde)
     db.session.add(device)
     db.session.commit()
     return device_schema.jsonify(device)
