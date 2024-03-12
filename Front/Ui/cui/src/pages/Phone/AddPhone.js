@@ -69,36 +69,36 @@ export default function AddPhone() {
                         <Box sx={{minWidth: 120}}>
                         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit}>
                             <FormControl>
-                                <div className="mb-3">
+                                    <div className="mb-3">
                                     <Label htmlFor="Router" value="Select Router" />
-                                    {devices.map((device, key) =>
-                                            <Select key={key}
+                                            <Select
                                                     label="Router"
                                                     onChange={handleChange}
                                             >
                                                 <option name="router" value="">None</option>
-                                                <option name="routerpe"
+                                                {devices.map((device, key) =>
+                                                    <option key={key} name="routerpe"
                                                           value={device.namede}>{device.namede}</option>
+                                                )}
                                             </Select>
-                                        )}
                                     </div>
-                                    <div className="mb-3">
+                                <div className="mb-3">
                                         <Label htmlFor="phonetag" value="Phone Tag" />
                                         <TextInput name="tagpe" id="phonetag" onChange={handleChange}/>
                                     </div>
                                     <div className="mb-3">
                                         <Label htmlFor="countries" value="Select Owner" />
-                                        {directorys.map((directory, key2) =>
-                                            <Select key={key2}
+                                            <Select
                                                     label="Owner"
                                                     onChange={handleChange}
                                             >
 
                                                 <option name="owner" value="">None</option>
-                                                <option name="ownerpe"
+                                                {directorys.map((directory, key2) =>
+                                                    <option key={key2} name="ownerpe"
                                                         value={directory.namedn}>{directory.namedn}</option>
+                                                )}
                                             </Select>
-                                        )}
                                     </div>
                                 <div className="mb-3">
                                         <TextField name="typepe" id="outlined-basic" label="Phone Type"
