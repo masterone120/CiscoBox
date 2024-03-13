@@ -55,13 +55,13 @@ export default function ListPhone() {
         },
     }));
 
-    const StyledTableRow = styled(TableRow)(({ theme}) => ({
+    const StyledTableRow = styled(TableRow)(({theme}) => ({
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
-    },
+        },
         '&:last-child td, &:last-child th': {
             border: 0,
-    },
+        },
     }));
 
     const [open, setOpen] = React.useState(false);
@@ -69,45 +69,70 @@ export default function ListPhone() {
     const handleClose = () => setOpen(false);
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth:700}} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Phone Router</StyledTableCell>
-                        <StyledTableCell>Phone Tag</StyledTableCell>
-                        <StyledTableCell>Phone Owner</StyledTableCell>
-                        <StyledTableCell>Phone Type</StyledTableCell>
-                        <StyledTableCell>Line Number</StyledTableCell>
-                        <StyledTableCell>Phone Name</StyledTableCell>
-                        <StyledTableCell>Digist User</StyledTableCell>
-                        <StyledTableCell>Digist Pass</StyledTableCell>
-                        <StyledTableCell>Codec</StyledTableCell>
-                        <StyledTableCell>Class Codec</StyledTableCell>
-                        <StyledTableCell>Action</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {phones.map((phone, key) => (
-                        <StyledTableRow key={key}>
-                            <StyledTableCell component="th" scope="row">{phone.routerpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.tagpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.ownerpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.typepe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.linepe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.idmacpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.userdnpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.passdnpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.codecpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{phone.vcodecpe}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">
-                                <Link to={`/phone/${phone.id_phone}/edit`} className="btn btn-success" style={{marginRight: "10px"}}>Edit</Link>
-                                <Button variant="contained" color="error" onClick={() => deletePhone(phone.id_phone)} >Delete</Button>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div>
+            <div className="container h-100">
+                <div className="row h-100">
+                    <div className="col-12">
+                        <h2 className="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">
+                            <span
+                                className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">LIST PHONES</span>
+                        </h2>                        <TableContainer component={Paper}>
+                        <p><Link to="/addphone" className="btn btn-success">Add New Phone</Link></p>
+                        <br/>
+                        <Table sx={{minWidth: 700}} aria-label="customized table">
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>Phone Router</StyledTableCell>
+                                    <StyledTableCell>Phone Tag</StyledTableCell>
+                                    <StyledTableCell>Phone Owner</StyledTableCell>
+                                    <StyledTableCell>Phone Type</StyledTableCell>
+                                    <StyledTableCell>Line Number</StyledTableCell>
+                                    <StyledTableCell>Phone Name</StyledTableCell>
+                                    <StyledTableCell>Digist User</StyledTableCell>
+                                    <StyledTableCell>Digist Pass</StyledTableCell>
+                                    <StyledTableCell>Codec</StyledTableCell>
+                                    <StyledTableCell>Class Codec</StyledTableCell>
+                                    <StyledTableCell>Action</StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {phones.map((phone, key) => (
+                                    <StyledTableRow key={key}>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.routerpe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.tagpe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.ownerpe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.typepe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.linepe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.idmacpe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.userdnpe}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row"
+                                                         className="hidetext">{phone.passdnpe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.codecpe}</StyledTableCell>
+                                        <StyledTableCell component="th"
+                                                         scope="row">{phone.vcodecpe}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">
+                                            <Link to={`/phone/${phone.id_phone}/edit`}
+                                                  className="btn btn-success"
+                                                  style={{marginRight: "10px"}}>Edit</Link>
+                                            <Button variant="contained" color="error"
+                                                    onClick={() => deletePhone(phone.id_phone)}>Delete</Button>
+                                        </StyledTableCell>
+                                    </StyledTableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
-
 }
